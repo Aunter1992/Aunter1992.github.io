@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="什么是依赖注入如果一个类A 的功能实现需要借助于类B，那么就称类B是类A的依赖，如果在类A的内部去实例化类B，那么两者之间会出现较高的耦合，一旦类B出现了问题，类A也需要进行改造，如果这样的情况较多，每个类之间都有很多依赖，那么就会出现牵一发而动全身的情况，程序会极难维护，并且很容易出现问题。要解决这个问题，就要把A类对B类的控制权抽离出来，交给一个第三方去做，把控制权反转给第三方，就称作控制反转">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BVRP3.0 依赖注入">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;11&#x2F;BVRP_V3%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5&#x2F;index.html">
+<meta property="og:site_name" content="润尼尔">
+<meta property="og:description" content="什么是依赖注入如果一个类A 的功能实现需要借助于类B，那么就称类B是类A的依赖，如果在类A的内部去实例化类B，那么两者之间会出现较高的耦合，一旦类B出现了问题，类A也需要进行改造，如果这样的情况较多，每个类之间都有很多依赖，那么就会出现牵一发而动全身的情况，程序会极难维护，并且很容易出现问题。要解决这个问题，就要把A类对B类的控制权抽离出来，交给一个第三方去做，把控制权反转给第三方，就称作控制反转">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-11T06:26:21.690Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/11/11/BVRP_V3%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>BVRP3.0 依赖注入 | 润尼尔</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">润尼尔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">在线技术文档</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/11/BVRP_V3%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="润尼尔">
+      <meta itemprop="description" content="路漫漫其修远兮">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="润尼尔">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BVRP3.0 依赖注入
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-11-11 10:06:53 / 修改时间：14:26:21" itemprop="dateCreated datePublished" datetime="2019-11-11T10:06:53+08:00">2019-11-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BVRP3-0/" itemprop="url" rel="index">
+                    <span itemprop="name">BVRP3.0</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/11/BVRP_V3%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/11/BVRP_V3%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="什么是依赖注入"><a href="#什么是依赖注入" class="headerlink" title="什么是依赖注入"></a>什么是依赖注入</h1><p>如果一个类A 的功能实现需要借助于类B，那么就称类B是类A的依赖，如果在类A的内部去实例化类B，那么两者之间会出现较高的耦合，一旦类B出现了问题，类A也需要进行改造，如果这样的情况较多，每个类之间都有很多依赖，那么就会出现牵一发而动全身的情况，程序会极难维护，并且很容易出现问题。要解决这个问题，就要把A类对B类的控制权抽离出来，交给一个第三方去做，把控制权反转给第三方，就称作<strong>控制反转</strong>（IOC Inversion Of Control）。控制反转是一种思想，是能够解决问题的一种可能的结果，而<strong>依赖注入</strong>（Dependency Injection）就是其最典型的实现方法。<strong>由第三方（我们称作IOC容器）来控制依赖，把他通过构造函数、属性或者工厂模式等方法，注入到类A内，这样就极大程度的对类A和类B进行了解耦</strong>。</p>
+<a id="more"></a>
+<hr>
+<h1 id="BVRP中的IOC"><a href="#BVRP中的IOC" class="headerlink" title="BVRP中的IOC"></a>BVRP中的IOC</h1><p>IoC容器作为对象存储区持有对象引用，在存储区内的对象被称为托管对象，其他对象可以通过IoC容器获取托管对象的引用或通过IoC容器创建临时对象。托管对象一般由IoC容器维护其生命周期。</p>
+<p><strong>BVRP中的IOC容器叫做InjectService</strong>，具备静态注册和瞬态注册两套对象托管方法，每套注册方法又分为实例注册、接口注册、函数注册。静态注册作用将托管对象作为单例使用，瞬态注册作用是在需要时临时创建对象。实例注册指将一个对象注册为托管对象，托管对象暴露所有公有属性、字段和函数。接口注册指将一个接口的类型和接口具体的实现注册为托管对象，托管对象仅暴露公有函数。函数注册指将一个对象的方法注册为托管“对象”，托管对象仅暴露一个特定函数</p>
+<hr>
+<h1 id="InjectService所支持的API函数"><a href="#InjectService所支持的API函数" class="headerlink" title="InjectService所支持的API函数"></a>InjectService所支持的API函数</h1><pre>
+//在容器中获取一个实例引用
+public static object Get(Type interfaceType);
+
+//在容器中获取一个实例引用
+public static TInterface Get<TInterface>() where TInterface : class;
+
+//想实例中注入对象； 此方法实现依赖与注解、反射、递归
+public static void InjectInto(object instance);
+//打印容器内容
+public static IEnumerable<string> Print();
+//注册一个单利服务，被注册的单利在软件的软件整个生命周期内都存且指存在唯一实例；
+public static void RegisterSingleton<TInstance>(TInstance instance) where TInstance : class;
+
+//注册一个单利服务，被注册的单利在软件的软件整个生命周期内都存且指存在唯一实例；
+public static void RegisterSingleton<TInstance>(Func<TInstance> factory) where TInstance : class;
+
+//注册一个单利服务，被注册的单利在软件的软件整个生命周期内都存且指存在唯一实例；
+public static void RegisterSingleton<TInterface, TInstance>(TInstance instance) where TInstance : class;
+
+//注册一个单利服务，被注册的单利在软件的软件整个生命周期内都存且指存在唯一实例；
+public static void RegisterSingleton<TInstance>() where TInstance : class, new();
+
+//注册一个单利服务，被注册的单利在软件的软件整个生命周期内都存且指存在唯一实例；
+public static void RegisterSingleton<TInterface, TInstance>() where TInstance : class, new();
+
+//注册一个单利服务，被注册的单利在软件的软件整个生命周期内都存且指存在唯一实例；
+public static void RegisterSingleton<TInterface, TInstance>(Func<TInstance> factory) where TInstance : class;
+
+//注册一个瞬态服务，在每次执行字段的Get时都会实例化一个新的服务实例
+public static void RegisterTransient<TInstance>(Func<TInstance> factory) where TInstance : class;
+
+//注册一个瞬态服务，在每次执行字段的Get时都会实例化一个新的服务实例
+public static void RegisterTransient<TInterface, TInstance>(Func<TInstance> factory) where TInstance : class;
+
+//注册一个瞬态服务，在每次执行字段的Get时都会实例化一个新的服务实例
+public static void RegisterTransient<TInstance>() where TInstance : class, new();
+
+//注册一个瞬态服务，在每次执行字段的Get时都会实例化一个新的服务实例
+public static void RegisterTransient<TInterface, TInstance>() where TInstance : class, new();
+
+// 删除注册的实例引用
+public static bool Unregister<TInterface>() where TInterface : class, new();
+
+//删除所有注册实例引用
+public static void UnregisterAll();
+</Pre>
+
+<hr>
+<h1 id="InjectService的应用"><a href="#InjectService的应用" class="headerlink" title="InjectService的应用"></a>InjectService的应用</h1><h2 id="实例创建"><a href="#实例创建" class="headerlink" title="实例创建"></a>实例创建</h2><h3 id="单例服务"><a href="#单例服务" class="headerlink" title="单例服务"></a>单例服务</h3><p>单例服务指，实例在被创建后，在整个软件生命周期中只存在唯一一个实例。</p>
+<ul>
+<li><p>使用示例一（类注入）</p>
+<pre><code>//简单类
+public class LogService
+{
+}
+//Mono类
+public class UIManager:MonoBehaviour
+{
+}
+//单例注入
+InjectService.RegisterSingleton(new LogService());
+InjectService.RegisterSingleton(GameObject.FindObjectOfType&lt;UIManager&gt;());</code></pre></li>
+</ul>
+<ul>
+<li><p>使用示例二（接口注入）</p>
+<pre><code>//日志接口
+public interface ILog
+{}
+//web端log
+public class WebLogService:ILog
+{}
+//通用log
+public class CommonLogService:ILog
+{}
+//单例注入
+ //if web平台
+InjectService.RegisterSingleton&lt;ILog,WebLogService&gt;(new WebLogService());
+ //if ios平台
+InjectService.RegisterSingleton&lt;ILog,CommonLogService&gt;(new CommonLogService());</code></pre></li>
+</ul>
+<ul>
+<li><p>使用示例三（工厂注入）</p>
+<pre><code>//继承自通用log，ios端log
+public class IosLogService:CommonLogService
+{
+}
+
+//工厂方法
+public TInstance FacMethod()
+{
+ //do something
+  return new IosLogService();
+}
+
+//单例注入
+InjectService.RegisterSingleton&lt;CommonLogService&gt;(FacMethod);
+
+InjectService.RegisterSingleton&lt;ILog,CommonLogService&gt;(FacMethod);</code></pre></li>
+</ul>
+<h3 id="瞬态服务"><a href="#瞬态服务" class="headerlink" title="瞬态服务"></a>瞬态服务</h3><p>瞬态服务指，每次都会创建一个新的实例返回给使用者，不是唯一的。</p>
+<ul>
+<li><p>使用示例一（类注入）</p>
+<pre><code>//一般类
+public class SpawnCube()
+{     
+}
+//瞬态注入
+InjectService.RegisterTransient(new SpawnCube());</code></pre></li>
+<li><p>使用示例二 （接口注入）</p>
+<pre><code>public interface ISpawnShape
+{}
+public class SpawnBullet:ISpawnShape
+{}
+
+//瞬态注入
+InjectService.RegisterTransient&lt;ISpawnShape,SpawnBullet&gt;(new SpawnBullet());</code></pre></li>
+<li><p>使用示例三 （工厂注入）</p>
+<pre><code>public class SpawnAk_Bullet:SpawnBullet
+{
+}
+//工厂方法
+public TInstance FacMethod()
+{
+ //do something
+
+  return new SpawnBullet();
+}
+//瞬态注入
+InjectService.RegisterTransient&lt;SpawnBullet&gt;(FacMethod);
+
+InjectService.RegisterTransient&lt;ISpawnShape,SpawnBullet&gt;(FacMethod);</code></pre></li>
+</ul>
+<h2 id="实例获取"><a href="#实例获取" class="headerlink" title="实例获取"></a>实例获取</h2><p>在BVRP提供的IOC容器InjectService中，提供了两种实例获取的方式</p>
+<h3 id="标签注入"><a href="#标签注入" class="headerlink" title="标签注入"></a>标签注入</h3><p>使用标签的方式，必须在当前类初始化的时候从容器中获取已经存在的实例，此种方式的优点在于，可以将所需要的全局实例注入到父类当中，在子类当中便已经默认存在这些全局实例</p>
+<pre><code>//以Mono类为例
+public class GetInstance:Monobehaviour
+{
+
+ [Inject]
+ private LogService _logService=null;
+
+ [Inject]
+ private ILog  _webLogService=null;
+
+ void Start()
+ {
+   //执行依赖注入操作，被标签标记的对象必须是已经初始化过的
+   InjectService.InjectInto(this);
+ }
+
+}</code></pre><h3 id="直接获取"><a href="#直接获取" class="headerlink" title="直接获取"></a>直接获取</h3><p>通过InjectService提供的Get方法直接获取IOC容器中存在的实例，防止抛出异常，可先判断当前IOC中是否存在当前类型的实例</p>
+<pre><code>//以Mono类为例
+public class GetInstance:Monobehaviour
+{
+
+ //类声明
+ private LogService _logService=null;
+
+ //以接口声明
+ private ILog  _webLogService=null;
+
+ void Start()
+ {
+   //获取已经存在的实例
+    if (InjectService.Get&lt;_logService&gt;() != null)
+    {
+        _logService=InjectService.Get&lt;_logService&gt;();
+    }
+
+    if (InjectService.Get&lt;ILog&gt;() != null)
+    {
+        _logService=InjectService.Get&lt;ILog&gt;();
+    }
+
+ }
+
+}</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/08/BVRP_V3%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/" rel="next" title="BVRP3.0 有限状态机">
+                  <i class="fa fa-chevron-left"></i> BVRP3.0 有限状态机
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/11/BVRP_V3Watch%E7%BB%93%E6%9E%84/" rel="prev" title="BVRP3.0 Watch结构">
+                  BVRP3.0 Watch结构 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是依赖注入"><span class="nav-number">1.</span> <span class="nav-text">什么是依赖注入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BVRP中的IOC"><span class="nav-number">2.</span> <span class="nav-text">BVRP中的IOC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InjectService所支持的API函数"><span class="nav-number">3.</span> <span class="nav-text">InjectService所支持的API函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InjectService的应用"><span class="nav-number">4.</span> <span class="nav-text">InjectService的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例创建"><span class="nav-number">4.1.</span> <span class="nav-text">实例创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单例服务"><span class="nav-number">4.1.1.</span> <span class="nav-text">单例服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#瞬态服务"><span class="nav-number">4.1.2.</span> <span class="nav-text">瞬态服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例获取"><span class="nav-number">4.2.</span> <span class="nav-text">实例获取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标签注入"><span class="nav-number">4.2.1.</span> <span class="nav-text">标签注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接获取"><span class="nav-number">4.2.2.</span> <span class="nav-text">直接获取</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="润尼尔"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">润尼尔</p>
+  <div class="site-description" itemprop="description">路漫漫其修远兮</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">润尼尔</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'cCe96dxtk3lWxadJXQ2BEmnr-gzGzoHsz',
+    appKey: 'd8PzBLBx1QOCIMNXCRDEY2Hj',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
