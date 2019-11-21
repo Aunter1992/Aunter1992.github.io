@@ -50,26 +50,24 @@
   };
 </script>
 
-  <meta name="description" content="内容概要   StorageSystem插件，是基于BVRP3.0基础框架而开发的，实现了对属性变化以及方法调用 产生的事件消息体的记录、序列化、反序列化。通过对已记录事件的广播，从而达到实验的回放功能。具体的流程如下图所示。">
+  <meta name="description" content="内容概要平台对接的文件夹名为PlatformDocking，基于BVRP3.0基础框架内容实现，包含了pc、webgl、云平台三种平台获取实验当前登录的用户信息的方式，并提供了统一的实验内容上传接口，由PlatformInteraction来处理完成，具体的流程如下图示：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="存储系统">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F&#x2F;index.html">
+<meta property="og:title" content="平台对接">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%B9%B3%E5%8F%B0%E5%AF%B9%E6%8E%A5&#x2F;index.html">
 <meta property="og:site_name" content="润尼尔">
-<meta property="og:description" content="内容概要   StorageSystem插件，是基于BVRP3.0基础框架而开发的，实现了对属性变化以及方法调用 产生的事件消息体的记录、序列化、反序列化。通过对已记录事件的广播，从而达到实验的回放功能。具体的流程如下图所示。">
+<meta property="og:description" content="内容概要平台对接的文件夹名为PlatformDocking，基于BVRP3.0基础框架内容实现，包含了pc、webgl、云平台三种平台获取实验当前登录的用户信息的方式，并提供了统一的实验内容上传接口，由PlatformInteraction来处理完成，具体的流程如下图示：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F&#x2F;1-1.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F&#x2F;2-1.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F&#x2F;2-2.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F&#x2F;2-3.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F&#x2F;3-1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F&#x2F;3-2.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F&#x2F;3-3.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F&#x2F;3-4.jpg">
-<meta property="og:updated_time" content="2019-11-21T02:31:52.741Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%B9%B3%E5%8F%B0%E5%AF%B9%E6%8E%A5&#x2F;1-1.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%B9%B3%E5%8F%B0%E5%AF%B9%E6%8E%A5&#x2F;2-1.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%B9%B3%E5%8F%B0%E5%AF%B9%E6%8E%A5&#x2F;2-2.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%B9%B3%E5%8F%B0%E5%AF%B9%E6%8E%A5&#x2F;3-1.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%B9%B3%E5%8F%B0%E5%AF%B9%E6%8E%A5&#x2F;3-2.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%B9%B3%E5%8F%B0%E5%AF%B9%E6%8E%A5&#x2F;3-3.jpg">
+<meta property="og:updated_time" content="2019-11-21T06:27:23.342Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F&#x2F;1-1.jpg">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Plugins&#x2F;%E5%B9%B3%E5%8F%B0%E5%AF%B9%E6%8E%A5&#x2F;1-1.jpg">
 
-<link rel="canonical" href="http://yoursite.com/BVRP3.0_Plugins/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F/">
+<link rel="canonical" href="http://yoursite.com/BVRP3.0_Plugins/%E5%B9%B3%E5%8F%B0%E5%AF%B9%E6%8E%A5/">
 
 
 <script id="page-configurations">
@@ -83,7 +81,7 @@
   };
 </script>
 
-  <title>存储系统 | 润尼尔</title>
+  <title>平台对接 | 润尼尔</title>
   
 
 
@@ -223,7 +221,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/BVRP3.0_Plugins/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/BVRP3.0_Plugins/%E5%B9%B3%E5%8F%B0%E5%AF%B9%E6%8E%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.svg">
@@ -236,7 +234,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          存储系统
+          平台对接
         </h1>
 
         <div class="post-meta">
@@ -245,16 +243,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-11-20 10:12:11" itemprop="dateCreated datePublished" datetime="2019-11-20T10:12:11+08:00">2019-11-20</time>
+              <time title="创建时间：2019-11-21 09:37:52 / 修改时间：14:27:23" itemprop="dateCreated datePublished" datetime="2019-11-21T09:37:52+08:00">2019-11-21</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-21 10:31:52" itemprop="dateModified" datetime="2019-11-21T10:31:52+08:00">2019-11-21</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -283,8 +275,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/BVRP3.0_Plugins/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/BVRP3.0_Plugins/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F/" itemprop="commentCount"></span>
+    <a title="valine" href="/BVRP3.0_Plugins/%E5%B9%B3%E5%8F%B0%E5%AF%B9%E6%8E%A5/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/BVRP3.0_Plugins/%E5%B9%B3%E5%8F%B0%E5%AF%B9%E6%8E%A5/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -299,91 +291,57 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="内容概要"><a href="#内容概要" class="headerlink" title="内容概要"></a>内容概要</h1><p>   StorageSystem插件，是基于BVRP3.0基础框架而开发的，实现了对属性变化以及方法调用 产生的事件消息体的记录、序列化、反序列化。通过对已记录事件的广播，从而达到实验的回放功能。具体的流程如下图所示。</p>
-<p><img src="1-1.jpg" alt="基本流程"></p>
-<hr>
+        <h1 id="内容概要"><a href="#内容概要" class="headerlink" title="内容概要"></a>内容概要</h1><p>平台对接的文件夹名为PlatformDocking，基于BVRP3.0基础框架内容实现，包含了pc、webgl、云平台三种平台获取实验当前登录的用户信息的方式，<br>并提供了统一的实验内容上传接口，由PlatformInteraction来处理完成，具体的流程如下图示：<br><img src="1-1.jpg" alt="基本流程"></p>
 <a id="more"></a>
-
-
-<h1 id="文件结构及内容"><a href="#文件结构及内容" class="headerlink" title="文件结构及内容"></a>文件结构及内容</h1><p><img src="2-1.jpg" alt="脚本文件结构"></p>
-<ul>
-<li><p><strong>Handler文件夹</strong></p>
-<p>包含3个业务逻辑处理类：</p>
-<p>LocalDataHandler：将序列化后的事件消息体保存到本地（Pc、WebGL）</p>
-<p>NetDataHandler：将序列化后的事件消息体保存到网络服务器上（需要定义URL和对应的请求参数）</p>
-<p>VideoHandler：录像回放的播放器，将反序列化后的事件消息体，按照帧顺序逐一广播。</p>
-</li>
-<li><p><strong>Hepler文件夹</strong></p>
-<p>主要包含录像功能的几个辅助性功能类：</p>
-<p>ScreenMask：用于上传，存储数据等待过程中的UI遮罩</p>
-<p>UIAnchorUtility：通过代码设置UGUI的Anchor锚点</p>
-<p>ZipUtility：提供常用的压缩、解压缩API</p>
-</li>
-</ul>
-<ul>
-<li><p><strong>UIView文件夹</strong></p>
-<p>包含录像回放用到UI功能类:</p>
-<p>UIEventSupportView:作为基类使用，主要用于UI的事件源基类</p>
-<p>UIStorageView：提供实验中产生的数据保存以及加载的UI界面  </p>
-<p><img src="2-2.png" alt=""></p>
-<p>UIReplayView：录像回放中的UI界面</p>
-<p><img src="2-3.png" alt=""></p>
-</li>
-</ul>
-<ul>
-<li><p><strong>WebGLWebAPI文件夹</strong></p>
-<p>包含一个接口以及jslib接口的包装类：</p>
-<p>IWebGlWebAPIService：定义jslib接口中实现的方法</p>
-<p>WebGLWebAPIServiceWapper：实现对jslib中的方法调用。主要包含在WebGL上打印日志，存储文本到本地以及从本地读取文本</p>
-</li>
-<li><p><strong>EventPool</strong></p>
-<p> 事件消息体对象池，用于存储在整个软件生命周期中，所产生的每个事件消息体，默认情况包括属性事件和方法事件</p>
-</li>
-<li><p><strong>EventStorageLogic</strong></p>
-<p>存储事件消息的业务逻辑，包含对事件消息体的存储，以及对事件消息体的过滤</p>
-</li>
-<li><p><strong>StorageConfigSettings</strong></p>
-<p>存储系统的配置脚本，用于初始化存储系统，可设置是否使用存储系统，或者使用扩展的存储系统</p>
-</li>
-<li><p><strong>StorageIgnored</strong></p>
-<p>特性标签，用于过滤事件消息体 </p>
-</li>
-<li><p><strong>StorageSystem</strong></p>
-<p>默认的存储系统管理类，提供事件消息体的序列化还反序列化、数据的保存和加载以及录像回放的初始化，可继承重写部分逻 </p>
-</li>
-</ul>
 <hr>
-<h1 id="存储系统应用"><a href="#存储系统应用" class="headerlink" title="存储系统应用"></a>存储系统应用</h1><p>整个存储系统应用比较简单，给定几个简单的设置，挂载对应的事件消息体记录脚本，即可。前提是整个软件的编程环境是基于BVRP3.0的事件系统来完成的。</p>
-<h2 id="简单配置"><a href="#简单配置" class="headerlink" title="简单配置"></a>简单配置</h2><ul>
-<li>修改存储系统配置脚本(StorageConfigSetting),如下图</li>
+<h1 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h1><ul>
+<li>旧平台：根据中文提示 填充对应的URL,如果是采用PC版本，则需要自定义esid,需注意URL之间的斜杠符号.</li>
 </ul>
-<p><img src="3-1.png" alt="配置脚本">            </p>
+<p><img src="2-1.jpg" alt="旧平台"></p>
 <ul>
-<li>数据存储配置</li>
+<li>新平台：按照中文提示填写对应的URL，实验唯一标识码可在平台的实验资源中查看，新平台的成绩和报告URL后缀是通过登录来获取，默认是不变的，所以直接在配置中给出。</li>
 </ul>
-<p><img src="3-2.png" alt="宏定义配置"></p>
-<h2 id="事件记录"><a href="#事件记录" class="headerlink" title="事件记录"></a>事件记录</h2><p>事件记录默认只需要将EventStorageLogic脚本挂载到带有DataModelBehaviour的GameObject上即可。如果要实现回放，每个带有DataModelBehaviour的GameObject也必须挂载UniqueID脚本。</p>
-<h3 id="实体是继承自Entity的事件记录"><a href="#实体是继承自Entity的事件记录" class="headerlink" title="实体是继承自Entity的事件记录"></a>实体是继承自Entity的事件记录</h3><p>EventStorageLogic也是继承自LogicBehaviour的，凡是有实体数据变化或方法调用的事件，都会有由DataModelBeahviour接收到，并路由到所有已挂载的LogicBehaviour上</p>
+<p><img src="2-2.jpg" alt="新平台"></p>
+<hr>
+<h1 id="应用方式"><a href="#应用方式" class="headerlink" title="应用方式"></a>应用方式</h1><h2 id="脚本挂载"><a href="#脚本挂载" class="headerlink" title="脚本挂载"></a>脚本挂载</h2><p>挂载PlatformInteraction脚本或者是继承自PlatformInteraction的子类，选择相应的平台，如果是pc版，则填写相应的用户名和密码。具体如下图所示，使用时挂载一个即可，在程序运行开始，会自动登录获取相应的用户信息</p>
+<p><img src="3-1.jpg" alt=""></p>
+<h2 id="成绩上传"><a href="#成绩上传" class="headerlink" title="成绩上传"></a>成绩上传</h2><p>   成绩上传包含三个平台。根据网络平台的不同，具体的操作方式也有不相同的地方。</p>
+<h3 id="旧平台"><a href="#旧平台" class="headerlink" title="旧平台"></a>旧平台</h3><ul>
+<li><p>说明</p>
+<p> 旧平台，不论是webgl、pc、还是云平台，在获取到用户登录信息之后，都是通过Http请求的方式，上传数据</p>
+</li>
+<li><p>调用</p>
+<p>上传成绩可直接调用PlatformInteraction类中的成员函数UploadScore,参数为实验成绩，一般为int型</p>
+<p><img src="3-2.jpg" alt=""></p>
+</li>
+</ul>
+<h3 id="新平台"><a href="#新平台" class="headerlink" title="新平台"></a>新平台</h3><ul>
+<li>说明</li>
+</ul>
+<p>新平台，也称简易平台。如果发布的平台是WebGL版本，需要根据网络平台给出的参考文档和文件，修改发布后的index文件，以及放置提供的文件到对应的位置。具体操作流程，参考对应的网络平台提供的操作文档</p>
+<p>如果是pc（暂未使用过）和云平台，则依旧按照Http的方式。</p>
+<ul>
+<li>调用</li>
+</ul>
+<p>WebGL：直接调用PlatformInteraction类中的成员函数SendScoreToWeb,参数为实验成绩，一般为int型</p>
 <p><img src="3-3.jpg" alt=""></p>
-<h3 id="实体是继承自EventSupportBehaviour的事件记录"><a href="#实体是继承自EventSupportBehaviour的事件记录" class="headerlink" title="实体是继承自EventSupportBehaviour的事件记录"></a>实体是继承自EventSupportBehaviour的事件记录</h3><p>这种情况下 实体即EventSupprotBehaviour，也会由DataModelBehaviour来接收由EventSupprotBehaviour发出的属性变化和方法调用事件，路由到LogicBehaviour。</p>
-<p><strong>特别说明：</strong>在这种情况下，如果业务逻辑都是在EventSupportBehaviour中处理的，则就不需要挂载LogicBehaviour，只挂载EventStorageLogic记录事件即可</p>
-<p><img src="3-4.jpg" alt=""></p>
-<hr>
-<h1 id="自定义扩展"><a href="#自定义扩展" class="headerlink" title="自定义扩展"></a>自定义扩展</h1><p><strong>必要条件</strong>：如果要使用自定义的数据存储以及UI，首先需要继承StorageSystem，参考父类重写相关的虚函数。在StorageConfigSettings配置脚本中，实例化对应的子类。</p>
-<h2 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h2><ul>
-<li>数据存储</li>
+<p>Pc和云平台：直接调用前面提到的UploadScore方法。</p>
+<h2 id="实验报告上传"><a href="#实验报告上传" class="headerlink" title="实验报告上传"></a>实验报告上传</h2><ul>
+<li>说明</li>
 </ul>
-<p>参考对应的NetDataHandler或者LocalDataHandler，编写对应的数据持久化内容。在继承自StorageSystem的子类中实例化，并使用。</p>
+<p>由于实验报告上传内容各不相同，所以需要自行编写上传的实验数据。数据编写完成后，直接利用PlatformInteraction类中提供的ExcuteRequest方法提交数据即可</p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ul>
+<li>接口引用</li>
+</ul>
+<p>建议直接继承PlatformInteraction类，并重新实现对应的实验报告上传，等内容。然后作为全局单例引用</p>
 <ul>
-<li>UI</li>
+<li>用户信息</li>
 </ul>
-<p>继承UIEventSupprotView，编写对应的保存、加载UI（在配置脚本中实例化），以及播放器UI。在继承自StorageSystem的子类中实例化。</p>
+<p>当程序初始化完成，成功获取用户信息后，会作为静态变量userInfo存储在PlatformLoginProxy中，可直接使用。</p>
 <ul>
-<li>播放器</li>
+<li>定义回调函数</li>
 </ul>
-<p>参考ViedoHandler，处理EventPool中的事件消息队列。在继承自StorageSystem的子类中实例化。</p>
-<hr>
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>在实现录像回放时，可以采用比较简单的方式，比如记录所有的方法调用事件，需要注意参数的类型是否支持序列化。<br>对于动态生成物体，需要在编辑器状态下勾选上UniqueID的IsPrefab选项</p>
+<p>在PlatformInteraction类提供了空的回调方法 LoginCallBack，具体的内容，程序员可根据情况不同，自定义。</p>
 
     </div>
 
@@ -397,17 +355,14 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/Unity_BulidSettings/Unity%E5%8F%91%E5%B8%83Logo%E8%AE%BE%E7%BD%AE/" rel="next" title="Unty发布Logo设置">
-                  <i class="fa fa-chevron-left"></i> Unty发布Logo设置
+                <a href="/BVRP3.0_Plugins/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F/" rel="next" title="存储系统">
+                  <i class="fa fa-chevron-left"></i> 存储系统
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/BVRP3.0_Plugins/%E5%B9%B3%E5%8F%B0%E5%AF%B9%E6%8E%A5/" rel="prev" title="平台对接">
-                  平台对接 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
@@ -447,7 +402,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#内容概要"><span class="nav-number">1.</span> <span class="nav-text">内容概要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件结构及内容"><span class="nav-number">2.</span> <span class="nav-text">文件结构及内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储系统应用"><span class="nav-number">3.</span> <span class="nav-text">存储系统应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单配置"><span class="nav-number">3.1.</span> <span class="nav-text">简单配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件记录"><span class="nav-number">3.2.</span> <span class="nav-text">事件记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实体是继承自Entity的事件记录"><span class="nav-number">3.2.1.</span> <span class="nav-text">实体是继承自Entity的事件记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实体是继承自EventSupportBehaviour的事件记录"><span class="nav-number">3.2.2.</span> <span class="nav-text">实体是继承自EventSupportBehaviour的事件记录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义扩展"><span class="nav-number">4.</span> <span class="nav-text">自定义扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义类型"><span class="nav-number">4.1.</span> <span class="nav-text">自定义类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意事项"><span class="nav-number">5.</span> <span class="nav-text">注意事项</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#内容概要"><span class="nav-number">1.</span> <span class="nav-text">内容概要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数配置"><span class="nav-number">2.</span> <span class="nav-text">参数配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用方式"><span class="nav-number">3.</span> <span class="nav-text">应用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本挂载"><span class="nav-number">3.1.</span> <span class="nav-text">脚本挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成绩上传"><span class="nav-number">3.2.</span> <span class="nav-text">成绩上传</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#旧平台"><span class="nav-number">3.2.1.</span> <span class="nav-text">旧平台</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新平台"><span class="nav-number">3.2.2.</span> <span class="nav-text">新平台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验报告上传"><span class="nav-number">3.3.</span> <span class="nav-text">实验报告上传</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意事项"><span class="nav-number">4.</span> <span class="nav-text">注意事项</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
