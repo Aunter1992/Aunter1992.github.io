@@ -54,12 +54,12 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Watch结构">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Turtorials&#x2F;Watch%E7%BB%93%E6%9E%84&#x2F;index.html">
-<meta property="og:site_name" content="润尼尔">
+<meta property="og:site_name" content="Aunter">
 <meta property="og:description" content="Watch概要 介绍  Watch结构作为 BVRP的核心，是基于事件系统并借鉴 MVVM设计而成的一个三层结构体系，由数据实体、数据载体、业务逻辑组成，适用于解耦合三维模型和数据模型，具备良好的对象间通信机制，主要用于GameObject的数据层控制。  说明  沿用2.0的三层结构，保持编码格式，形成统一的编程规范 分离数据与业务逻辑，实现更智能的智能指导和批改 以事件驱动，更简易的实现对实现">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Turtorials&#x2F;Watch%E7%BB%93%E6%9E%84&#x2F;1-1.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Turtorials&#x2F;Watch%E7%BB%93%E6%9E%84&#x2F;2-1.jpg">
-<meta property="og:updated_time" content="2019-11-21T08:04:30.040Z">
+<meta property="og:updated_time" content="2020-01-07T06:16:56.449Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;BVRP3.0_Turtorials&#x2F;Watch%E7%BB%93%E6%9E%84&#x2F;1-1.png">
 
@@ -77,7 +77,7 @@
   };
 </script>
 
-  <title>Watch结构 | 润尼尔</title>
+  <title>Watch结构 | Aunter</title>
   
 
 
@@ -121,7 +121,7 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">润尼尔</span>
+        <span class="site-title">Aunter</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -221,12 +221,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.svg">
-      <meta itemprop="name" content="润尼尔">
+      <meta itemprop="name" content="王庚">
       <meta itemprop="description" content="路漫漫其修远兮">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="润尼尔">
+      <meta itemprop="name" content="Aunter">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -247,7 +247,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-21 16:04:30" itemprop="dateModified" datetime="2019-11-21T16:04:30+08:00">2019-11-21</time>
+                <time title="修改时间：2020-01-07 14:16:56" itemprop="dateModified" datetime="2020-01-07T14:16:56+08:00">2020-01-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -308,7 +308,7 @@
 </ul>
 <p>Entity实现<strong>组合</strong></p>
 <p>Logic可根据特性标签实现对消息源的订阅</p>
-<p>三层机构对应的关系：<strong>n:1:n</strong></p>
+<p>三层结构对应的关系：<strong>n:1:n</strong></p>
 <img src="/BVRP3.0_Turtorials/Watch%E7%BB%93%E6%9E%84/1-1.png" class="">
 
 <a id="more"></a>
@@ -318,9 +318,9 @@
 <li><strong>Entity</strong> </li>
 </ul>
 <p><strong>说明</strong>： 数据实体，继承自<strong>EObject</strong>,并实现了ISerializable接口，包含2个属性的初始化事件Id、Enable(实体被订阅时触发)。提供事件的发送方法。提供对自身数据的序列化（仅支持JsonDotNet可序列化的数据类型）</p>
-<p><strong>编码要求</strong>：</p>
+<p><strong>应用示例</strong>：</p>
 <p>字段的定义必须有属性包装，并按照如下方式编写</p>
-<pre><code>public class HelloEntity
+<pre><code>public class HelloEntity：Entity
 {
   //带有此标签，表示会发送初始化事件消息
    [FireInitEvent]
@@ -359,7 +359,7 @@
 <li><strong>DataModelBehaviour</strong> </li>
 </ul>
 <p><strong>说明</strong>： 实体绑定（以GameObject为单位，首先必须关注自身的实体数据，其次也可以关注其他GameObject上的实体数据），事件分发，建立实体和逻辑之间的关联关系，需要挂载到unity的GameObject上。</p>
-<p><strong>应用说明：</strong> 以下示例性代码主要说明，DataModel（即DataModelBehaviour）对实体数据的操作。</p>
+<p><strong>应用示例：</strong> 以下示例性代码主要说明，DataModel（即DataModelBehaviour）对实体数据的操作。</p>
 <pre><code>//定义自己的DataModel，继承DataModelBehaviour
 public class HelloModel : DataModelBehaviour
 {
@@ -508,9 +508,9 @@ public class HelloLogic : LogicBehaviour
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="site-author-image" itemprop="image" alt="润尼尔"
+  <img class="site-author-image" itemprop="image" alt="王庚"
     src="/images/head.svg">
-  <p class="site-author-name" itemprop="name">润尼尔</p>
+  <p class="site-author-name" itemprop="name">王庚</p>
   <div class="site-description" itemprop="description">路漫漫其修远兮</div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -559,7 +559,7 @@ public class HelloLogic : LogicBehaviour
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">润尼尔</span>
+  <span class="author" itemprop="copyrightHolder">王庚</span>
 </div>
 
         
